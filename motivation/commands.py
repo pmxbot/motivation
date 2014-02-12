@@ -1,3 +1,6 @@
+import random
+
+import pmxbot
 from pmxbot.core import command
 from pmxbot.karma import Karma
 
@@ -10,8 +13,7 @@ def pm(client, event, channel, nick, rest):
     else:
         rcpt = channel
 
-    if nick == 'Dusty':
-        # Dusty thinks double adjectives are more piratey.
+    if random.random() > 0.95:
         return "Arrggh ye be doin' great, grand work, %s!" % rcpt
     return "Arrggh ye be doin' good work, %s!" % rcpt
 
@@ -26,7 +28,7 @@ def lm(client, event, channel, nick, rest):
         rcpt = channel
     return '¡Estás haciendo un buen trabajo, %s!' % rcpt
 
-@command('fm', aliases=('frenchmotivate',), doc='Michel puts on the moves')
+@command('fm', aliases=('frenchmotivate',), doc='pmxbot parle français')
 def fm(client, event, channel, nick, rest):
     if rest:
         rest = rest.strip()
@@ -49,7 +51,8 @@ def jm(client, event, channel, nick, rest):
     hon_ja = ' さん'
 
     # Use correct honorific.
-    if rcpt.lower().startswith('michel'):
+    bosses = pmxbot.config.get('bosses', set())
+    if any(rcpt.lower().startswith(boss_nick) for boss_nick in bosses):
         hon_romaji = ' sensei'
         hon_ja = ' 先生'
 
@@ -68,18 +71,16 @@ def jm(client, event, channel, nick, rest):
         'imasu!)  -  {emoji}'.format(**vars())
     )
 
-@command('danke', aliases=('dankeschoen','ds','gm','germanmotivate'), doc='Danke schön!')
+@command('danke', aliases=('dankeschoen','ds','gm','germanmotivate'),
+    doc='Danke schön!')
 def danke(client, event, channel, nick, rest):
     if rest:
         rest = rest.strip()
-        change = -1 if 'istvan' in rest else 1 # istvan strives for negative karma
-        Karma.store.change(rest, change)
+        Karma.store.change(rest, 1)
         rcpt = rest
     else:
         rcpt = channel
-    extra = ', Du kölsche Jung' if rcpt == 'cperry' else ''
-    return 'Danke schön, {rcpt}! Danke schön{extra}!'.format(
-        rcpt=rcpt, extra=extra)
+    return 'Danke schön, {rcpt}! Danke schön!'.format(rcpt=rcpt)
 
 @command('esperantomotivate', aliases=('em',), doc='Esperanto motivate')
 def em(client, event, channel, nick, rest):
