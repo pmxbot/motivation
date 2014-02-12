@@ -10,11 +10,11 @@ with open('CHANGES.txt') as changes:
 setup_params = dict(
 	name='motivation',
 	use_hg_version=True,
-	author="Jason R. Coombs",
-	author_email="jaraco@jaraco.com",
+	author="YouGov, Plc.",
+	author_email="open-source@yougov.com",
 	description="motivation",
 	long_description=long_description,
-	url="https://bitbucket.org/jaraco/motivation",
+	url="https://bitbucket.org/yougov/motivation",
 	packages=setuptools.find_packages(),
 	setup_requires=[
 		'hgtools',
