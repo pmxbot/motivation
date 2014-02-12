@@ -19,6 +19,11 @@ setup_params = dict(
 	setup_requires=[
 		'hgtools',
 	],
+	entry_points=dict(
+		pmxbot_handlers=[
+			'motivation = motivation.commands',
+		],
+	),
 )
 if __name__ == '__main__':
 	setuptools.setup(**setup_params)
