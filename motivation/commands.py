@@ -75,8 +75,7 @@ def jm(client, event, channel, nick, rest):
         'imasu!)  -  {emoji}'.format(**vars())
     )
 
-@command('danke', aliases=('dankeschoen','ds','gm','germanmotivate'),
-    doc='Danke schön!')
+@command('danke', aliases=('dankeschoen','ds'), doc='Danke schön!')
 def danke(client, event, channel, nick, rest):
     if rest:
         rest = rest.strip()
@@ -85,6 +84,18 @@ def danke(client, event, channel, nick, rest):
     else:
         rcpt = channel
     return 'Danke schön, {rcpt}! Danke schön!'.format(rcpt=rcpt)
+
+
+@command('gm', aliases=('germanmotivate',), doc='German motivate')
+def pm(client, event, channel, nick, rest):
+    if rest:
+        rest = rest.strip()
+        Karma.store.change(rest, 1)
+        rcpt = rest
+    else:
+        rcpt = channel
+    return "Du leistest gute Arbeit, %s!" % rcpt
+
 
 @command('esperantomotivate', aliases=('em',), doc='Esperanto motivate')
 def em(client, event, channel, nick, rest):
