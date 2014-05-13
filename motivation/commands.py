@@ -106,3 +106,28 @@ def em(client, event, channel, nick, rest):
     else:
         rcpt = channel
     return 'Vi faras bonan laboron, {rcpt}!'.format(rcpt=rcpt)
+
+@command('schneier', doc='schneier "facts"')
+def schneier(client, event, channel, nick, rest):
+    rcpt = rest.strip() or channel
+    if rest.strip():
+        Karma.store.change(rcpt, 2)
+
+    d = urllib2.urlopen('http://www.schneierfacts.com/').read()
+    start_tag = re.escape('<p class="fact">')
+    end_tag = re.escape('</p>')
+    p = re.compile(start_tag + '(.*?)' + end_tag,
+        flags=re.DOTALL | re.MULTILINE)
+    match = p.search(d)
+
+    if not match:
+        return "Sorry, no facts found (check your crypto anyway)."
+    phrase = match.group(1).replace('\n', ' ').strip()
+    if rcpt != channel:
+        phrase = phrase.replace('Bruce Schneier', rcpt)
+
+    # unescape HTML
+    h = HTMLParser.HTMLParser()
+    phrase = h.unescape(phrase)
+
+    return phrase
