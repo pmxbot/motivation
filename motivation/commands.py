@@ -87,7 +87,7 @@ def danke(client, event, channel, nick, rest):
 
 
 @command('gm', aliases=('germanmotivate',), doc='German motivate')
-def pm(client, event, channel, nick, rest):
+def gm(client, event, channel, nick, rest):
     if rest:
         rest = rest.strip()
         Karma.store.change(rest, 1)
