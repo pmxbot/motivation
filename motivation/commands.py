@@ -3,7 +3,11 @@
 from __future__ import unicode_literals
 
 import random
+import re
 
+from six.moves import html_parser
+
+import requests
 import pmxbot
 from pmxbot.core import command
 from pmxbot.karma import Karma
@@ -113,7 +117,8 @@ def schneier(client, event, channel, nick, rest):
     if rest.strip():
         Karma.store.change(rcpt, 2)
 
-    d = urllib2.urlopen('http://www.schneierfacts.com/').read()
+    url = 'http://www.schneierfacts.com/'
+    d = requests.get(url).text
     start_tag = re.escape('<p class="fact">')
     end_tag = re.escape('</p>')
     p = re.compile(start_tag + '(.*?)' + end_tag,
@@ -127,7 +132,7 @@ def schneier(client, event, channel, nick, rest):
         phrase = phrase.replace('Bruce Schneier', rcpt)
 
     # unescape HTML
-    h = HTMLParser.HTMLParser()
+    h = html_parser.HTMLParser()
     phrase = h.unescape(phrase)
 
     return phrase
