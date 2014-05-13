@@ -18,12 +18,17 @@ setup_params = dict(
 	packages=setuptools.find_packages(),
 	setup_requires=[
 		'hgtools',
+		'pytest-runner',
 	],
 	entry_points=dict(
 		pmxbot_handlers=[
 			'motivation = motivation.commands',
 		],
 	),
+	tests_require=[
+		'pytest',
+		'pmxbot',
+	],
 )
 if __name__ == '__main__':
 	setuptools.setup(**setup_params)
