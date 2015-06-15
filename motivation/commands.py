@@ -129,7 +129,9 @@ def schneier(client, event, channel, nick, rest):
         return "Sorry, no facts found (check your crypto anyway)."
     phrase = match.group(1).replace('\n', ' ').strip()
     if rcpt != channel:
-        phrase = phrase.replace('Bruce Schneier', rcpt)
+        # use regular expression substitution for case insensitivity
+        # as some phrases feature BRUCE SCHNEIER :(
+        phrase = re.sub('Bruce Schneier', rcpt, phrase, flags=re.I)
 
     # unescape HTML
     h = html_parser.HTMLParser()
