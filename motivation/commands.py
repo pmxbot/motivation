@@ -12,8 +12,9 @@ import pmxbot
 from pmxbot.core import command
 from pmxbot.karma import Karma
 
-@command('pm', aliases=('piratemotivate',), doc='Arggh matey')
+@command(aliases='piratemotivate')
 def pm(client, event, channel, nick, rest):
+    'Arggh matey'
     if rest:
         rest = rest.strip()
         Karma.store.change(rest, 2)
@@ -26,8 +27,9 @@ def pm(client, event, channel, nick, rest):
     return "Arrggh ye be doin' good work, %s!" % rcpt
 
 
-@command('lm', aliases=('latinmotivate',), doc='Rico Suave')
+@command(aliases='latinmotivate')
 def lm(client, event, channel, nick, rest):
+    'Rico Suave'
     if rest:
         rest = rest.strip()
         Karma.store.change(rest, 2)
@@ -36,8 +38,9 @@ def lm(client, event, channel, nick, rest):
         rcpt = channel
     return '¡Estás haciendo un buen trabajo, %s!' % rcpt
 
-@command('fm', aliases=('frenchmotivate',), doc='pmxbot parle français')
+@command(aliases='frenchmotivate')
 def fm(client, event, channel, nick, rest):
+    'pmxbot parle français'
     if rest:
         rest = rest.strip()
         Karma.store.change(rest, 2)
@@ -46,7 +49,7 @@ def fm(client, event, channel, nick, rest):
         rcpt = channel
     return 'Vous bossez bien, %s!' % rcpt
 
-@command('jm', aliases=('japanesemotivate',), doc='')
+@command(aliases='japanesemotivate')
 def jm(client, event, channel, nick, rest):
     if rest:
         rest = rest.strip()
@@ -79,8 +82,9 @@ def jm(client, event, channel, nick, rest):
         'imasu!)  -  {emoji}'.format(**vars())
     )
 
-@command('danke', aliases=('dankeschoen','ds'), doc='Danke schön!')
+@command(aliases=('dankeschoen', 'ds'))
 def danke(client, event, channel, nick, rest):
+    'Danke schön!'
     if rest:
         rest = rest.strip()
         Karma.store.change(rest, 1)
@@ -90,7 +94,7 @@ def danke(client, event, channel, nick, rest):
     return 'Danke schön, {rcpt}! Danke schön!'.format(rcpt=rcpt)
 
 
-@command('gm', aliases=('germanmotivate',), doc='German motivate')
+@command(aliases=('germanmotivate',), doc='German motivate')
 def gm(client, event, channel, nick, rest):
     if rest:
         rest = rest.strip()
@@ -111,8 +115,9 @@ def em(client, event, channel, nick, rest):
         rcpt = channel
     return 'Vi faras bonan laboron, {rcpt}!'.format(rcpt=rcpt)
 
-@command('schneier', doc='schneier "facts"')
+@command()
 def schneier(client, event, channel, nick, rest):
+    'schneier "facts"'
     rcpt = rest.strip() or channel
     if rest.strip():
         Karma.store.change(rcpt, 2)
