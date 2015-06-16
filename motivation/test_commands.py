@@ -20,3 +20,30 @@ def test_schneier_all_caps():
 	"At least one schneier fact features BRUCE SCHNEIER"
 	res = commands.schneier(None, None, "#inane", None, "darwin")
 	assert res == "How awesome is darwin!"
+
+@mock.patch('requests.get',
+	mock.Mock(
+		return_value=mock.Mock(text='<p class="fact">How awesome is Bruce Schneier? Bruce Schneier!</p>',
+	)))
+def test_schneier_multi():
+	"At least one schneier fact features the phrase twice"
+	res = commands.schneier(None, None, "#inane", None, "darwin")
+	assert res == "How awesome is darwin? darwin!"
+
+@mock.patch('requests.get',
+	mock.Mock(
+		return_value=mock.Mock(text='<p class="fact">How awesome is BruceSchneier!</p>',
+	)))
+def test_schneier_no_space():
+	"At least one fact contains BRUCESCHNEIER"
+	res = commands.schneier(None, None, "#inane", None, "darwin")
+	assert res == "How awesome is darwin!"
+
+@mock.patch('requests.get',
+	mock.Mock(
+		return_value=mock.Mock(text='<p class="fact">How awesome is Schneier!</p>',
+	)))
+def test_schneier_no_bruce():
+	"At least one fact contains only 'schneier'"
+	res = commands.schneier(None, None, "#inane", None, "darwin")
+	assert res == "How awesome is darwin!"
