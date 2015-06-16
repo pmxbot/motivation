@@ -18,7 +18,7 @@ setup_params = dict(
 	packages=setuptools.find_packages(),
 	setup_requires=[
 		'hgtools',
-		'pytest-runner',
+		'pytest-runner>=2.1',
 	],
 	entry_points=dict(
 		pmxbot_handlers=[
