@@ -136,7 +136,7 @@ def schneier(client, event, channel, nick, rest):
     if rcpt != channel:
         # use regular expression substitution for case insensitivity
         # as some phrases feature BRUCE SCHNEIER :(
-        phrase = re.sub('Bruce Schneier', rcpt, phrase, flags=re.I)
+        phrase = re.sub('(Bruce ?)?Schneier', rcpt, phrase, flags=re.I)
 
     # unescape HTML
     h = html_parser.HTMLParser()
