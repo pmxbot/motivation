@@ -1,4 +1,4 @@
-import mock
+from unittest import mock
 
 # mock the pmxbot imports
 pmxbot = mock.MagicMock()
