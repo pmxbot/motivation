@@ -1,11 +1,11 @@
 from unittest import mock
 
-# mock the pmxbot imports
-pmxbot = mock.MagicMock()
-pmxbot.core = mock.MagicMock(command=mock.Mock(return_value=lambda func:func))
-pmxbot.karma = mock.MagicMock()
 
 def pytest_configure(config):
+	# mock the pmxbot imports
+	pmxbot = mock.MagicMock()
+	pmxbot.core = mock.MagicMock(command=mock.Mock(return_value=lambda func:func))
+	pmxbot.karma = mock.MagicMock()
 
 	config.patcher = mock.patch.dict('sys.modules', {
 		'pmxbot': pmxbot,
