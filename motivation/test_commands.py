@@ -47,3 +47,12 @@ def test_schneier_no_bruce():
 	"At least one fact contains only 'schneier'"
 	res = commands.schneier(None, None, "#inane", None, "darwin")
 	assert res == "How awesome is darwin!"
+
+@mock.patch('requests.get',
+	mock.Mock(
+		return_value=mock.Mock(text='<p class="fact">How awesome is Bruce!</p>',
+	)))
+def test_schneier_no_schneier():
+	"At least one fact contains only 'bruce'"
+	res = commands.schneier(None, None, "#inane", None, "darwin")
+	assert res == "How awesome is darwin!"
