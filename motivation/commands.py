@@ -141,4 +141,7 @@ def schneier(client, event, channel, nick, rest):
     h = html_parser.HTMLParser()
     phrase = h.unescape(phrase)
 
+    # Correct improperly-encoded strings
+    phrase = phrase.replace("Ã¶", "Ã¶".encode('latin-1').decode('utf-8'))
+
     return phrase
