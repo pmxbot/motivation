@@ -9,7 +9,7 @@ with open('CHANGES.txt') as changes:
 
 setup_params = dict(
 	name='motivation',
-	use_hg_version=True,
+	use_scm_version=True,
 	author="YouGov, Plc.",
 	author_email="open-source@yougov.com",
 	description="motivation",
@@ -17,7 +17,7 @@ setup_params = dict(
 	url="https://bitbucket.org/yougov/motivation",
 	packages=setuptools.find_packages(),
 	setup_requires=[
-		'hgtools',
+		'setuptools_scm',
 		'pytest-runner>=2.1',
 	],
 	entry_points=dict(
