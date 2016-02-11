@@ -115,6 +115,18 @@ def em(client, event, channel, nick, rest):
         rcpt = channel
     return 'Vi faras bonan laboron, {rcpt}!'.format(rcpt=rcpt)
 
+
+@command(aliases=('рm', 'rm'), doc="Motivate nick на русском")
+def russianmotivate(client, event, channel, nick, rest):
+    if rest:
+        rest = rest.strip()
+        Karma.store.change(rest, 1)
+        rcpt = rest
+    else:
+        rcpt = channel
+    return 'Вы делаете хорошую работу, {rcpt}!'.format(rcpt=rcpt)
+
+
 @command()
 def schneier(client, event, channel, nick, rest):
     'schneier "facts"'
