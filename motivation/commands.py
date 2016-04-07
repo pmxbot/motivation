@@ -11,6 +11,8 @@ import requests
 import pmxbot
 from pmxbot.core import command
 from pmxbot.karma import Karma
+import ftfy
+
 
 @command(aliases='piratemotivate')
 def pm(client, event, channel, nick, rest):
@@ -154,6 +156,6 @@ def schneier(client, event, channel, nick, rest):
     phrase = h.unescape(phrase)
 
     # Correct improperly-encoded strings
-    phrase = phrase.replace("Ã¶", "Ã¶".encode('latin-1').decode('utf-8'))
+    phrase = ftfy.fix_encoding(phrase)
 
     return phrase

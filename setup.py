@@ -16,6 +16,9 @@ setup_params = dict(
 	long_description=long_description,
 	url="https://bitbucket.org/yougov/motivation",
 	packages=setuptools.find_packages(),
+	install_requires=[
+		'ftfy',
+	],
 	setup_requires=[
 		'setuptools_scm',
 		'pytest-runner>=2.1',
