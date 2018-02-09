@@ -2,6 +2,8 @@ from unittest import mock
 
 import six
 
+import pytest
+
 from motivation import commands
 
 
@@ -10,6 +12,7 @@ def test_jm():
 	assert isinstance(res, six.text_type)
 
 
+@pytest.mark.xfail(reason="Site is down")
 def test_schneier():
 	res = commands.schneier(None, None, "#inane", None, "foo")
 	assert 'foo' in res
