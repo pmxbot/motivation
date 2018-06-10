@@ -1,11 +1,8 @@
 # -*- coding: utf-8 -*-
 
-from __future__ import unicode_literals
-
 import random
 import re
-
-from six.moves import html_parser
+import html.parser
 
 import requests
 import pmxbot
@@ -156,7 +153,7 @@ def schneier(client, event, channel, nick, rest):
         phrase = re.sub('Bruce', rcpt, phrase, flags=re.I)
 
     # unescape HTML
-    h = html_parser.HTMLParser()
+    h = html.parser.HTMLParser()
     phrase = h.unescape(phrase)
 
     # Correct improperly-encoded strings

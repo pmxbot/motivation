@@ -1,5 +1,7 @@
-1.7
+2.0
 ===
+
+Dropped support for Python 2.
 
 Refreshed project metadata.
 
