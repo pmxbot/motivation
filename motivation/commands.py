@@ -1,4 +1,4 @@
-#-*- coding: utf-8 -*-
+# -*- coding: utf-8 -*-
 
 from __future__ import unicode_literals
 
@@ -40,6 +40,7 @@ def lm(client, event, channel, nick, rest):
         rcpt = channel
     return '¡Estás haciendo un buen trabajo, %s!' % rcpt
 
+
 @command(aliases='frenchmotivate')
 def fm(client, event, channel, nick, rest):
     'pmxbot parle français'
@@ -50,6 +51,7 @@ def fm(client, event, channel, nick, rest):
     else:
         rcpt = channel
     return 'Vous bossez bien, %s!' % rcpt
+
 
 @command(aliases='japanesemotivate')
 def jm(client, event, channel, nick, rest):
@@ -83,6 +85,7 @@ def jm(client, event, channel, nick, rest):
         '({rcpt}{hon_romaji}, anata wa yoku yatte '
         'imasu!)  -  {emoji}'.format(**vars())
     )
+
 
 @command(aliases=('dankeschoen', 'ds'))
 def danke(client, event, channel, nick, rest):
@@ -140,7 +143,8 @@ def schneier(client, event, channel, nick, rest):
     d = requests.get(url).text
     start_tag = re.escape('<p class="fact">')
     end_tag = re.escape('</p>')
-    p = re.compile(start_tag + '(.*?)' + end_tag,
+    p = re.compile(
+        start_tag + '(.*?)' + end_tag,
         flags=re.DOTALL | re.MULTILINE)
     match = p.search(d)
 
