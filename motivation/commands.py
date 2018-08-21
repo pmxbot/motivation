@@ -83,6 +83,16 @@ def jm(client, event, channel, nick, rest):
         'imasu!)  -  {emoji}'.format(**vars())
     )
 
+@command(aliases=('kurdishmotivate', 'km'))
+def danke(client, event, channel, nick, rest):
+    'Zor supas! — !زۆر سوپاس'
+    if rest:
+        rest = rest.strip()
+        Karma.store.change(rest, 1)
+        rcpt = rest
+    else:
+        rcpt = channel
+    return 'Zor supas {rcpt}, to zor zor barezi! — زۆر سوپاس، تۆ زۆر زۆر به‌ره‌زی'.format(rcpt=rcpt)
 
 @command(aliases=('dankeschoen', 'ds'))
 def danke(client, event, channel, nick, rest):
