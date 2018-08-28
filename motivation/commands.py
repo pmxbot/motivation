@@ -22,8 +22,8 @@ def pm(client, event, channel, nick, rest):
         rcpt = channel
 
     if random.random() > 0.95:
-        return "Arrggh ye be doin' great, grand work, %s!" % rcpt
-    return "Arrggh ye be doin' good work, %s!" % rcpt
+        return f"Arrggh ye be doin' great, grand work, {rcpt}!"
+    return f"Arrggh ye be doin' good work, {rcpt}!"
 
 
 @command(aliases='latinmotivate')
@@ -35,7 +35,7 @@ def lm(client, event, channel, nick, rest):
         rcpt = rest
     else:
         rcpt = channel
-    return '¡Estás haciendo un buen trabajo, %s!' % rcpt
+    return f'¡Estás haciendo un buen trabajo, {rcpt}!'
 
 
 @command(aliases='frenchmotivate')
@@ -47,7 +47,7 @@ def fm(client, event, channel, nick, rest):
         rcpt = rest
     else:
         rcpt = channel
-    return 'Vous bossez bien, %s!' % rcpt
+    return f'Vous bossez bien, {rcpt}!'
 
 
 @command(aliases='japanesemotivate')
@@ -75,9 +75,9 @@ def jm(client, event, channel, nick, rest):
     emoji = '(^_−)−☆'
 
     return (
-        '{rcpt}{hon_ja}, あなたわよくやっています! '
-        '({rcpt}{hon_romaji}, anata wa yoku yatte '
-        'imasu!)  -  {emoji}'.format(**locals())
+        f'{rcpt}{hon_ja}, あなたわよくやっています! '
+        f'({rcpt}{hon_romaji}, anata wa yoku yatte '
+        f'imasu!)  -  {emoji}'
     )
 
 
@@ -91,8 +91,8 @@ def zorsupas(client, event, channel, nick, rest):
     else:
         rcpt = channel
     return (
-        'Zor supas {rcpt}, to zor zor barezi! —'
-        ' زۆر سوپاس، تۆ زۆر زۆر به‌ره‌زی'.format(**locals())
+        f'Zor supas {rcpt}, to zor zor barezi! —'
+        ' زۆر سوپاس، تۆ زۆر زۆر به‌ره‌زی'
     )
 
 
@@ -105,7 +105,7 @@ def danke(client, event, channel, nick, rest):
         rcpt = rest
     else:
         rcpt = channel
-    return 'Danke schön, {rcpt}! Danke schön!'.format(rcpt=rcpt)
+    return f'Danke schön, {rcpt}! Danke schön!'
 
 
 @command(aliases=('germanmotivate',), doc='German motivate')
@@ -116,7 +116,7 @@ def gm(client, event, channel, nick, rest):
         rcpt = rest
     else:
         rcpt = channel
-    return "Du leistest gute Arbeit, %s!" % rcpt
+    return f'Du leistest gute Arbeit, {rcpt}!'
 
 
 @command('esperantomotivate', aliases=('em',), doc='Esperanto motivate')
@@ -127,7 +127,7 @@ def em(client, event, channel, nick, rest):
         rcpt = rest
     else:
         rcpt = channel
-    return 'Vi faras bonan laboron, {rcpt}!'.format(rcpt=rcpt)
+    return f'Vi faras bonan laboron, {rcpt}!'
 
 
 @command(aliases=('рm', 'rm'), doc="Motivate nick на русском")
@@ -138,7 +138,7 @@ def russianmotivate(client, event, channel, nick, rest):
         rcpt = rest
     else:
         rcpt = channel
-    return 'Вы делаете хорошую работу, {rcpt}!'.format(rcpt=rcpt)
+    return f'Вы делаете хорошую работу, {rcpt}!'
 
 
 @command()
