@@ -148,7 +148,7 @@ def schneier(client, event, channel, nick, rest):
     if rest.strip():
         Karma.store.change(rcpt, 2)
 
-    url = 'http://www.schneierfacts.com/'
+    url = 'https://www.schneierfacts.com/'
     d = requests.get(url).text
     start_tag = re.escape('<p class="fact">')
     end_tag = re.escape('</p>')

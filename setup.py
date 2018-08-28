@@ -39,6 +39,7 @@ params = dict(
 
 			# local
 			'pmxbot',
+			'responses',
 		],
 		'docs': [
 			# upstream

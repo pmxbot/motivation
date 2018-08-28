@@ -1,4 +1,6 @@
-from unittest import mock
+import functools
+
+import responses
 
 from motivation import commands
 
@@ -13,66 +15,51 @@ def test_schneier():
 	assert 'foo' in res
 
 
-@mock.patch(
-	'requests.get',
-	mock.Mock(
-		return_value=mock.Mock(
-			text='<p class="fact">How awesome is BRUCE SCHNEIER!</p>',
-		)
-	)
+add_fact = functools.partial(
+	responses.add,
+	responses.GET,
+	'https://www.schneierfacts.com/',
 )
+
+
+@responses.activate
 def test_schneier_all_caps():
 	"At least one schneier fact features BRUCE SCHNEIER"
+	add_fact('<p class="fact">How awesome is BRUCE SCHNEIER!</p>')
 	res = commands.schneier(None, None, "#inane", None, "darwin")
 	assert res == "How awesome is darwin!"
 
 
-@mock.patch(
-	'requests.get',
-	mock.Mock(
-		return_value=mock.Mock(
-			text='<p class="fact">How awesome is Bruce '
-			'Schneier? Bruce Schneier!</p>',
-		)
-	)
-)
+@responses.activate
 def test_schneier_multi():
 	"At least one schneier fact features the phrase twice"
+	add_fact(
+		'<p class="fact">How awesome is Bruce '
+		'Schneier? Bruce Schneier!</p>',
+	)
 	res = commands.schneier(None, None, "#inane", None, "darwin")
 	assert res == "How awesome is darwin? darwin!"
 
 
-@mock.patch(
-	'requests.get',
-	mock.Mock(
-		return_value=mock.Mock(
-			text='<p class="fact">How awesome is BruceSchneier!</p>',
-		)))
+@responses.activate
 def test_schneier_no_space():
 	"At least one fact contains BRUCESCHNEIER"
+	add_fact('<p class="fact">How awesome is BruceSchneier!</p>')
 	res = commands.schneier(None, None, "#inane", None, "darwin")
 	assert res == "How awesome is darwin!"
 
 
-@mock.patch(
-	'requests.get',
-	mock.Mock(
-		return_value=mock.Mock(
-			text='<p class="fact">How awesome is Schneier!</p>',
-		)))
+@responses.activate
 def test_schneier_no_bruce():
 	"At least one fact contains only 'schneier'"
+	add_fact('<p class="fact">How awesome is Schneier!</p>')
 	res = commands.schneier(None, None, "#inane", None, "darwin")
 	assert res == "How awesome is darwin!"
 
 
-@mock.patch(
-	'requests.get',
-	mock.Mock(
-		return_value=mock.Mock(
-			text='<p class="fact">How awesome is Bruce!</p>',
-		)))
+@responses.activate
 def test_schneier_no_schneier():
 	"At least one fact contains only 'bruce'"
+	add_fact('<p class="fact">How awesome is Bruce!</p>')
 	res = commands.schneier(None, None, "#inane", None, "darwin")
 	assert res == "How awesome is darwin!"
