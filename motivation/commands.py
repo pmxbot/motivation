@@ -93,7 +93,10 @@ def zorsupas(client, event, channel, nick, rest):
         rcpt = rest
     else:
         rcpt = channel
-    return 'Zor supas {rcpt}, to zor zor barezi! — زۆر سوپاس، تۆ زۆر زۆر به‌ره‌زی'.format(rcpt=rcpt)
+    return (
+        'Zor supas {rcpt}, to zor zor barezi! —'
+        ' زۆر سوپاس، تۆ زۆر زۆر به‌ره‌زی'.format(**locals())
+    )
 
 
 @command(aliases=('dankeschoen', 'ds'))
