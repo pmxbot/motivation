@@ -74,13 +74,10 @@ def jm(client, event, channel, nick, rest):
 
     emoji = '(^_−)−☆'
 
-    # reference the vars to avoid linter warnings
-    emoji, hon_romaji, hon_ja
-
     return (
         '{rcpt}{hon_ja}, あなたわよくやっています! '
         '({rcpt}{hon_romaji}, anata wa yoku yatte '
-        'imasu!)  -  {emoji}'.format(**vars())
+        'imasu!)  -  {emoji}'.format(**locals())
     )
 
 
