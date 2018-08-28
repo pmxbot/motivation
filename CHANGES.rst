@@ -1,3 +1,8 @@
+2.1
+===
+
+#2: Add ``kurdishmotivate``.
+
 2.0
 ===
 
