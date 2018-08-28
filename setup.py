@@ -25,7 +25,7 @@ params = dict(
 		name.split('.')[:-1] if nspkg_technique == 'managed'
 		else []
 	),
-	python_requires='>=3.4',
+	python_requires='>=3.6',
 	install_requires=[
 		'ftfy',
 	],
