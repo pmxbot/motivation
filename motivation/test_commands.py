@@ -1,6 +1,6 @@
 import functools
 
-import responses
+import pytest
 
 from motivation import commands
 
@@ -10,30 +10,31 @@ def test_jm():
 	assert isinstance(res, str)
 
 
+@pytest.mark.withoutresponses
 def test_schneier():
 	res = commands.schneier(None, None, "#inane", None, "foo")
 	assert 'foo' in res
 
 
-add_fact = functools.partial(
-	responses.add,
-	responses.GET,
-	'https://www.schneierfacts.com/',
-)
+@pytest.fixture
+def use_fact(responses):
+	return functools.partial(
+		responses.add,
+		responses.GET,
+		'https://www.schneierfacts.com/',
+	)
 
 
-@responses.activate
-def test_schneier_all_caps():
+def test_schneier_all_caps(use_fact):
 	"At least one schneier fact features BRUCE SCHNEIER"
-	add_fact('<p class="fact">How awesome is BRUCE SCHNEIER!</p>')
+	use_fact('<p class="fact">How awesome is BRUCE SCHNEIER!</p>')
 	res = commands.schneier(None, None, "#inane", None, "darwin")
 	assert res == "How awesome is darwin!"
 
 
-@responses.activate
-def test_schneier_multi():
+def test_schneier_multi(use_fact):
 	"At least one schneier fact features the phrase twice"
-	add_fact(
+	use_fact(
 		'<p class="fact">How awesome is Bruce '
 		'Schneier? Bruce Schneier!</p>',
 	)
@@ -41,25 +42,22 @@ def test_schneier_multi():
 	assert res == "How awesome is darwin? darwin!"
 
 
-@responses.activate
-def test_schneier_no_space():
+def test_schneier_no_space(use_fact):
 	"At least one fact contains BRUCESCHNEIER"
-	add_fact('<p class="fact">How awesome is BruceSchneier!</p>')
+	use_fact('<p class="fact">How awesome is BruceSchneier!</p>')
 	res = commands.schneier(None, None, "#inane", None, "darwin")
 	assert res == "How awesome is darwin!"
 
 
-@responses.activate
-def test_schneier_no_bruce():
+def test_schneier_no_bruce(use_fact):
 	"At least one fact contains only 'schneier'"
-	add_fact('<p class="fact">How awesome is Schneier!</p>')
+	use_fact('<p class="fact">How awesome is Schneier!</p>')
 	res = commands.schneier(None, None, "#inane", None, "darwin")
 	assert res == "How awesome is darwin!"
 
 
-@responses.activate
-def test_schneier_no_schneier():
+def test_schneier_no_schneier(use_fact):
 	"At least one fact contains only 'bruce'"
-	add_fact('<p class="fact">How awesome is Bruce!</p>')
+	use_fact('<p class="fact">How awesome is Bruce!</p>')
 	res = commands.schneier(None, None, "#inane", None, "darwin")
 	assert res == "How awesome is darwin!"

@@ -39,7 +39,7 @@ params = dict(
 
 			# local
 			'pmxbot',
-			'responses',
+			'pytest-responses',
 		],
 		'docs': [
 			# upstream
